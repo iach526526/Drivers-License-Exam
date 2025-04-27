@@ -1,0 +1,4 @@
+
+```
+pip install camelot-py
+```
