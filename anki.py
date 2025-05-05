@@ -20,7 +20,7 @@ def create_anki_CSV(csv_path, output_apkg_name):
             {
                 'name': 'Card 1',
                 'qfmt': '{{Question}}',
-                'afmt': '{{FrontSide}}<hr id="answer">{{Answer}}<br><small>{{Comment}}</small>',
+                'afmt': '{{FrontSide}}<hr id="answer">{{Answer}}<br><i>{{Comment}}</i>',
             },
         ])
 
@@ -71,8 +71,8 @@ def create_anki_CSV_IMG(csv_path, output_apkg_name):
         templates=[
             {
                 'name': 'Card 1',
-                'qfmt': '{{Question}}<br>{{Image}}',
-                'afmt': '{{FrontSide}}<hr id="answer">{{Answer}}<br>{{Comment}}'
+                'qfmt': '{{Question}}<br><br>{{Image}}',
+                'afmt': '{{FrontSide}}<hr id="answer">{{Answer}}<br><br><i>{{Comment}}</i>'
             },
         ])
 
@@ -89,7 +89,7 @@ def create_anki_CSV_IMG(csv_path, output_apkg_name):
     media_files = []  # 用來存放圖片檔案
 
     # 讀取 CSV，加入卡片
-    with open(csv_path, newline='', encoding='utf-8') as csvfile:
+    with open(csv_path, newline='', encoding='utf-8-sig') as csvfile:
         reader = csv.DictReader(csvfile)
         for idx, row in enumerate(reader, start=2):  # idx從2開始，因為第1行是表頭
             try:
@@ -114,5 +114,4 @@ def create_anki_CSV_IMG(csv_path, output_apkg_name):
     my_package = genanki.Package(deck)
     my_package.media_files =media_files
     my_package.write_to_file(output_path)
-    print(f"✅ 成功匯出 {output_path}",media_files)
-create_anki_CSV_IMG("./gen/sign-OX.csv","汽車號誌是非.apkg")
+    print(f"✅ 成功匯出 {output_path}")
